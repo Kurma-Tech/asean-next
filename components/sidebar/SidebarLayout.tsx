@@ -4,7 +4,7 @@ export interface ISidebarLayout {
   children?: React.ReactNode;
 }
 
-const SidebarLayout: React.FC<ISidebarLayout> = ({ children }) => {
+const SidebarLayout: React.FC<ISidebarLayout> = () => {
   return (
     <div className={styles.sidebar}>
       <p>SideBarLayout</p>
