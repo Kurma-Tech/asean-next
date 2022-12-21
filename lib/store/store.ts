@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
+import mapReducer from '../features/map/mapSlice';
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    map: mapReducer,
+  },
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

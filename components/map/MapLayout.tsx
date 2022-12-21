@@ -1,6 +1,14 @@
 import mapboxgl from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import {
+  selectLatitude,
+  selectLongitude,
+  selectZoom,
+  updateLocation,
+  updateZoom,
+} from '../../lib/features/map/mapSlice';
 import styles from './MapLayout.module.css';
 
 export interface IMapLayout {}
@@ -9,17 +17,18 @@ const MapLayout: React.FC<IMapLayout> = () => {
   mapboxgl.accessToken =
     'pk.eyJ1Ijoia3VybWF0ZWNoIiwiYSI6ImNsNWtrdTV5YzBheXQzZG80OGl2ZXk5aDUifQ.2SFfh7OhP2CTOyVeV3hSjw';
   const mapContainer = useRef(null);
+  const longitude = useSelector(selectLongitude);
+  const latitude = useSelector(selectLatitude);
+  const zoom = useSelector(selectZoom);
+  const dispatch = useDispatch();
   const map = useRef(null);
-  const [lng, setLng] = useState(111.09841688936865);
-  const [lat, setLat] = useState(2.37304225637002);
-  const [zoom, setZoom] = useState(5);
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
     map.current = new mapboxgl.Map({
       container: mapContainer.current!,
       style: 'mapbox://styles/kurmatech/cl7eioz5w000c14pjviwzu3sq',
-      center: [lng, lat],
+      center: [longitude, latitude],
       zoom: zoom,
       antialias: true,
       attributionControl: false,
@@ -33,9 +42,13 @@ const MapLayout: React.FC<IMapLayout> = () => {
   useEffect(() => {
     if (!map.current) return; // wait for map to initialize
     (map.current as any).on('move', () => {
-      setLng((map.current as any).getCenter().lng.toFixed(4));
-      setLat((map.current as any).getCenter().lat.toFixed(4));
-      setZoom((map.current as any).getZoom().toFixed(2));
+      dispatch(
+        updateLocation([
+          (map.current as any).getCenter().lat.toFixed(4),
+          (map.current as any).getCenter().lng.toFixed(4),
+        ])
+      );
+      dispatch(updateZoom((map.current as any).getZoom().toFixed(2)));
     });
   });
   return <div ref={mapContainer} className={styles.mapContainer} />;
