@@ -3,9 +3,7 @@ import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  selectLatitude,
-  selectLongitude,
-  selectZoom,
+  mapSelectors,
   updateLocation,
   updateZoom,
 } from '../../lib/features/map/mapSlice';
@@ -17,9 +15,9 @@ const MapLayout: React.FC<IMapLayout> = () => {
   mapboxgl.accessToken =
     'pk.eyJ1Ijoia3VybWF0ZWNoIiwiYSI6ImNsNWtrdTV5YzBheXQzZG80OGl2ZXk5aDUifQ.2SFfh7OhP2CTOyVeV3hSjw';
   const mapContainer = useRef(null);
-  const longitude = useSelector(selectLongitude);
-  const latitude = useSelector(selectLatitude);
-  const zoom = useSelector(selectZoom);
+  const longitude = useSelector(mapSelectors.selectLongitude);
+  const latitude = useSelector(mapSelectors.selectLatitude);
+  const zoom = useSelector(mapSelectors.selectZoom);
   const dispatch = useDispatch();
   const map = useRef(null);
 

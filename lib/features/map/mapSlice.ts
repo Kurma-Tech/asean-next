@@ -30,8 +30,10 @@ export const mapSlice = createSlice({
 
 export const { updateLocation, updateZoom } = mapSlice.actions;
 
-export const selectLatitude = (state: RootState) => state.map.latitude;
-export const selectLongitude = (state: RootState) => state.map.longitude;
-export const selectZoom = (state: RootState) => state.map.zoom;
+const selectLatitude = (state: RootState) => state.map.latitude;
+const selectLongitude = (state: RootState) => state.map.longitude;
+const selectZoom = (state: RootState) => state.map.zoom;
+
+export const mapSelectors = { selectLatitude, selectLongitude, selectZoom };
 
 export default mapSlice.reducer;
