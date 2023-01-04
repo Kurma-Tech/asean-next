@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
   return getLayout(
     <Provider store={store}>
-      <Component {...pageProps} />)
+      <Component {...pageProps} />
     </Provider>
   );
 }
