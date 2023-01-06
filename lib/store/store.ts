@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import filterValuesReducer from '../features/filter/filterValuesSlice';
+import { createWrapper } from 'next-redux-wrapper';
+import filterValuesReducer from '../features/filter/filterValuesReducer';
 import mapReducer from '../features/map/mapSlice';
 
 export const store = configureStore({
@@ -8,6 +9,10 @@ export const store = configureStore({
     filterValues: filterValuesReducer,
   },
 });
+
+const makeStore = () => store;
+
+export const wrapper = createWrapper(makeStore, { debug: true });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;

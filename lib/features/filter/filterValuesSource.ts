@@ -4,7 +4,7 @@ import { FilterDefaultValuesType } from './filterValuestype';
 
 export async function getFilterDefaultValuesSource(
   dataType: string
-): Promise<FilterDefaultValuesType | number> {
+): Promise<FilterDefaultValuesType> {
   const response: AxiosResponse = await axios.post(
     apiPaths.baseUrl + apiPaths.getFilterDefaultUrl,
     { dataType: dataType },
