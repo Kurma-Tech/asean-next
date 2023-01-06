@@ -14,6 +14,9 @@ const SidebarLayout: React.FC<ISidebarLayout> = () => {
   const default_values: FilterDefaultValuesType | undefined = useSelector(
     (state: RootState) => state.filterValues.default_values
   );
+  const dataType: string = useSelector(
+    (state: RootState) => state.filterValues.dataType
+  );
   return (
     <div
       className={`${styles.sidebar} w-1/6 max-w-full bg-white/[.7] backdrop-blur-[4px] box-border rounded-[12px]`}
@@ -48,7 +51,9 @@ const SidebarLayout: React.FC<ISidebarLayout> = () => {
               {default_values
                 ? default_values?.data_types?.map((data_type, index) => {
                     return (
-                      <option value={data_type.name}>{data_type.name}</option>
+                      <option key={index} value={data_type.name}>
+                        {data_type.name}
+                      </option>
                     );
                   })
                 : ''}
@@ -57,10 +62,13 @@ const SidebarLayout: React.FC<ISidebarLayout> = () => {
           <div className={`${styles.formGroup}`}>
             <label htmlFor="">Country</label>
             <select name="" id="" className={`${styles.filterInput}`}>
+              <option hidden>Select Country</option>
               {default_values
                 ? default_values?.countries?.map((data_type, index) => {
                     return (
-                      <option value={data_type.id}>{data_type.name}</option>
+                      <option key={index} value={data_type.id}>
+                        {data_type.name}
+                      </option>
                     );
                   })
                 : ''}
@@ -69,10 +77,11 @@ const SidebarLayout: React.FC<ISidebarLayout> = () => {
           <div className={`${styles.formGroup}`}>
             <label htmlFor="">Classification</label>
             <select name="" id="" className={`${styles.filterInput}`}>
+              <option hidden>Select Classification</option>
               {default_values
                 ? default_values?.categories?.map((data_type, index) => {
                     return (
-                      <option value={data_type.id}>
+                      <option key={index} value={data_type.id}>
                         {data_type.classifications}
                       </option>
                     );
@@ -80,49 +89,73 @@ const SidebarLayout: React.FC<ISidebarLayout> = () => {
                 : ''}
             </select>
           </div>
-          <div className={`${styles.formGroup}`}>
-            <label htmlFor="">Groups</label>
-            <select name="" id="" className={`${styles.filterInput}`}>
-              {default_values
-                ? default_values?.business_groups?.map((data_type, index) => {
-                    return (
-                      <option value={data_type.id}>{data_type.group}</option>
-                    );
-                  })
-                : ''}
-            </select>
-          </div>
-          <div className={`${styles.formGroup}`}>
-            <label htmlFor="">Type</label>
-            <select name="" id="" className={`${styles.filterInput}`}>
-              {default_values
-                ? default_values?.business_types?.map((data_type, index) => {
-                    return (
-                      <option value={data_type.id}>{data_type.type}</option>
-                    );
-                  })
-                : ''}
-            </select>
-          </div>
-          <div className={`${styles.formGroup}`}>
-            <label htmlFor="">Kind</label>
-            <select name="" id="" className={`${styles.filterInput}`}>
-              {default_values
-                ? default_values?.patent_kinds?.map((data_type, index) => {
-                    return (
-                      <option value={data_type.id}>{data_type.kind}</option>
-                    );
-                  })
-                : ''}
-            </select>
-          </div>
+          {dataType == 'business' ? (
+            <div className={`${styles.formGroup}`}>
+              <label htmlFor="">Groups</label>
+              <select name="" id="" className={`${styles.filterInput}`}>
+                <option hidden>Select Group</option>
+                {default_values
+                  ? default_values?.business_groups?.map((data_type, index) => {
+                      return (
+                        <option key={index} value={data_type.id}>
+                          {data_type.group}
+                        </option>
+                      );
+                    })
+                  : ''}
+              </select>
+            </div>
+          ) : (
+            <></>
+          )}
+          {dataType == 'business' ? (
+            <div className={`${styles.formGroup}`}>
+              <label htmlFor="">Type</label>
+              <select name="" id="" className={`${styles.filterInput}`}>
+                <option hidden>Select Type</option>
+                {default_values
+                  ? default_values?.business_types?.map((data_type, index) => {
+                      return (
+                        <option key={index} value={data_type.id}>
+                          {data_type.type}
+                        </option>
+                      );
+                    })
+                  : ''}
+              </select>
+            </div>
+          ) : (
+            <></>
+          )}
+          {dataType == 'patent' ? (
+            <div className={`${styles.formGroup}`}>
+              <label htmlFor="">Kind</label>
+              <select name="" id="" className={`${styles.filterInput}`}>
+                <option hidden>Select Kind</option>
+                {default_values
+                  ? default_values?.patent_kinds?.map((data_type, index) => {
+                      return (
+                        <option key={index} value={data_type.id}>
+                          {data_type.kind}
+                        </option>
+                      );
+                    })
+                  : ''}
+              </select>
+            </div>
+          ) : (
+            <></>
+          )}
           <div className={`${styles.formGroup}`}>
             <label htmlFor="">By Young</label>
             <select name="" id="" className={`${styles.filterInput}`}>
+              <option hidden>Select By Young</option>
               {default_values
                 ? default_values?.years?.map((data_type, index) => {
                     return (
-                      <option value={data_type.year}>{data_type.year}</option>
+                      <option key={index} value={data_type.year}>
+                        {data_type.year}
+                      </option>
                     );
                   })
                 : ''}

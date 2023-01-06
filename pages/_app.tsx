@@ -9,7 +9,7 @@ interface AppPropsWithLayout extends AppProps {
 }
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
-  const { store, props } = wrapper.useWrappedStore(pageProps);
+  const { store } = wrapper.useWrappedStore(pageProps);
 
   // Use the layout defined at the page level, if available
   const getLayout = Component.getLayout || ((page) => page);
