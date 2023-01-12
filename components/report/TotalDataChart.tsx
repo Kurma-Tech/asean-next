@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import {
   clearTotalChartAction,
@@ -31,21 +31,18 @@ const TotalDataChart: React.FC<ITotalDataChart> = () => {
   const removeRequest = useSelector(
     (state: RootState) => state.mapData.removeRequest
   );
-  const isReportVisible: boolean = useSelector(
-    (state: RootState) => state.report.isReportVisible
-  );
   const isReportNew: boolean = useSelector(
     (state: RootState) => state.report.isReportNew
   );
 
-  const getData = async () => {
+  const getData = useCallback(async () => {
     dispatch(
       await getTotalChartDataAction({
         dataType: dataType,
         country: country,
       })
     );
-  };
+  }, [dispatch, dataType, country]);
 
   useEffect(() => {
     if (removeRequest || isReportNew) {
@@ -55,7 +52,7 @@ const TotalDataChart: React.FC<ITotalDataChart> = () => {
     import('react-apexcharts').then((mod) => {
       setChart(() => mod.default);
     });
-  }, [getData]);
+  }, [getData, isReportNew, removeRequest, dispatch]);
 
   var chartState = {
     options: {

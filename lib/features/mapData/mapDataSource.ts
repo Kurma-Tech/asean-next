@@ -26,7 +26,7 @@ export async function getFilteredMapData(
       ? 'patents'
       : 'journals';
   var formattedData = response.data[reponseType]['data']
-    ? (response.data[reponseType]['data'] as []).map((business, index) => {
+    ? (response.data[reponseType]['data'] as []).map((business) => {
         return {
           type: 'Feature',
           geometry: {

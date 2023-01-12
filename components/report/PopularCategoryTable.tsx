@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import {
   clearPopularData,
@@ -32,14 +32,11 @@ const PopularCategoryTable: React.FC<IPopularCategoryTable> = () => {
   const removeRequest = useSelector(
     (state: RootState) => state.mapData.removeRequest
   );
-  const isReportVisible: boolean = useSelector(
-    (state: RootState) => state.report.isReportVisible
-  );
   const isReportNew: boolean = useSelector(
     (state: RootState) => state.report.isReportNew
   );
 
-  const getData = async () => {
+  const getData = useCallback(async () => {
     dispatch(
       await getPopularCategoryDataAction({
         dataType: dataType,
@@ -48,14 +45,14 @@ const PopularCategoryTable: React.FC<IPopularCategoryTable> = () => {
         year: year,
       })
     );
-  };
+  }, [dispatch, dataType, limit, country, year]);
 
   useEffect(() => {
     if (removeRequest || isReportNew) {
       dispatch(clearPopularData());
       getData();
     }
-  }, [getData]);
+  }, [getData, dispatch, isReportNew, removeRequest]);
   return (
     <div className="bg-white rounded-[12px] h-[320px] overflow-auto border-4 border-white box-border">
       <table className="table-auto items-center w-full">

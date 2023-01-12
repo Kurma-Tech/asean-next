@@ -1,5 +1,5 @@
 import mapboxgl from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import { FilterValuesState } from '../../lib/features/filter/filterValuesReducer';
@@ -63,13 +63,13 @@ const MapLayout: React.FC<IMapLayout> = () => {
     }) as any;
   });
 
-  const paginate = async () => {
+  const paginate = useCallback(async () => {
     if (paginationLink) {
       dispatch(await updateMapData(filterStateData, paginationLink));
     }
-  };
+  }, [dispatch, paginationLink, filterStateData]);
 
-  const removeLayers = () => {
+  const removeLayers = useCallback(() => {
     for (let index = 0; index <= pageNumber; index++) {
       var mapLayer = (map.current as any).getLayer('business-point' + index);
       if (typeof mapLayer !== 'undefined') {
@@ -80,9 +80,9 @@ const MapLayout: React.FC<IMapLayout> = () => {
     }
     dispatch(clearRemoveRequest());
     dispatch(clearPages());
-  };
+  }, [dispatch, pageNumber]);
 
-  const boilerplate = async () => {
+  const boilerplate = useCallback(async () => {
     if (removeRequest) {
       removeLayers();
     }
@@ -125,7 +125,14 @@ const MapLayout: React.FC<IMapLayout> = () => {
       );
       dispatch(updateZoom((map.current as any).getZoom().toFixed(2)));
     });
-  };
+  }, [
+    businessPoints,
+    dispatch,
+    pageNumber,
+    paginate,
+    removeLayers,
+    removeRequest,
+  ]);
   useEffect(() => {
     if (!map.current) return; // wait for map to initialize
     boilerplate().then(() => {});

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import {
   clearForecastChartAction,
@@ -34,14 +34,11 @@ const ForecastChart: React.FC<IForecastChart> = () => {
     (state: RootState) => state.forecastChartData.values,
     shallowEqual
   );
-  const isReportVisible: boolean = useSelector(
-    (state: RootState) => state.report.isReportVisible
-  );
   const isReportNew: boolean = useSelector(
     (state: RootState) => state.report.isReportNew
   );
 
-  const getData = async () => {
+  const getData = useCallback(async () => {
     dispatch(
       await getForecastChartDataAction({
         type:
@@ -56,7 +53,7 @@ const ForecastChart: React.FC<IForecastChart> = () => {
         classification_id: category ?? null,
       })
     );
-  };
+  }, [dispatch, category, country, dataType]);
 
   useEffect(() => {
     if (removeRequest || isReportNew) {
@@ -67,7 +64,7 @@ const ForecastChart: React.FC<IForecastChart> = () => {
     import('react-apexcharts').then((mod) => {
       setChart(() => mod.default);
     });
-  }, [getData]);
+  }, [getData, dispatch, isReportNew, removeRequest]);
 
   var chartState = {
     options: {
