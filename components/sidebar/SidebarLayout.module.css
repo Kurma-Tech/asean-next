@@ -1,0 +1,38 @@
+.formGroup:last-child {
+  border-bottom: none;
+}
+
+.formGroup {
+  padding: 10px 0;
+  border-bottom: 1px solid #ffffff;
+}
+
+.formGroup > label {
+  font-size: 14px;
+  line-height: 18px;
+  color: #444;
+  font-weight: 600;
+}
+
+.filterInput {
+  width: 100%;
+  border-radius: 5px;
+  padding: 7px 10px;
+  line-height: 18px;
+  font-size: 15px;
+  color: #444;
+  border: 1px solid #999;
+}
+
+.filterInput:focus-visible {
+  border: 1px solid #777 !important;
+}
+
+.filterBtn {
+  padding: 5px 10px;
+  font-size: 15px;
+  line-height: 18px;
+  border-radius: 6px;
+  border: 2px solid #efefef;
+  text-transform: capitalize;
+}
