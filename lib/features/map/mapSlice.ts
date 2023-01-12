@@ -34,6 +34,10 @@ const selectLatitude = (state: RootState) => state.map.latitude;
 const selectLongitude = (state: RootState) => state.map.longitude;
 const selectZoom = (state: RootState) => state.map.zoom;
 
-export const mapSelectors = { selectLatitude, selectLongitude, selectZoom };
+export const mapSelectors = {
+  selectLatitude,
+  selectLongitude,
+  selectZoom,
+};
 
 export default mapSlice.reducer;
