@@ -6,8 +6,8 @@ export const apiConfig = {
 };
 
 export const apiPaths = {
-  baseUrl: 'http://13.250.218.164/api',
-  baseUrl2: 'http://18.136.147.228/api/v1',
+  baseUrl: 'https://aseanemergingindustries.com/api',
+  baseUrl2: 'https://python.aseanemergingindustries.com/api/v1',
   getFilterDefaultUrl: '/filter/default',
   filterMapDataUrl: '/filter/mapdata',
   getPopularCategoryDataurl: '/report/popular',
