@@ -6,7 +6,7 @@ export const apiConfig = {
 };
 
 export const apiPaths = {
-  baseUrl: 'https://aseanemergingindustries.com/api',
+  baseUrl: 'https://backend.aseanemergingindustries.com/api',
   getFilterDefaultUrl: '/filter/default',
   filterMapDataUrl: '/filter/mapdata',
   getPopularCategoryDataurl: '/report/popular',
