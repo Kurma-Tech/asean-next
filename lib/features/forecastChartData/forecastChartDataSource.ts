@@ -11,15 +11,24 @@ export async function getForecastChartData(
   data: ResponseForecastChartDataType;
 }> {
   const response: AxiosResponse = await axios.post(
-    apiPaths.baseUrl2 + apiPaths.getForecastDataUrl,
+    apiPaths.baseUrl + apiPaths.getForecastDataUrl,
     {
       ...requestData,
     },
     apiConfig
   );
 
+  if (response.data['success'] == false) {
+    return {
+      data: {
+        keys: [],
+        values: [],
+      } as ResponseForecastChartDataType,
+    };
+  }
+
   return {
-    data: (response.data['prediction_data'] ?? {
+    data: (response.data['data'] ?? {
       keys: [],
       values: [],
     }) as ResponseForecastChartDataType,
