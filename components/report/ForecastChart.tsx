@@ -41,14 +41,7 @@ const ForecastChart: React.FC<IForecastChart> = () => {
   const getData = useCallback(async () => {
     dispatch(
       await getForecastChartDataAction({
-        type:
-          dataType == 'business'
-            ? 'businesses'
-            : dataType == 'patent'
-            ? 'patent_pivot_patent_category'
-            : dataType != 'journal'
-            ? 'journal_pivot_journal_category'
-            : 'businesses',
+        type: dataType,
         country_id: country ?? null,
         classification_id: category ?? null,
       })
