@@ -27,6 +27,7 @@
     "axios": "^1.2.1",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",
+    "formik": "^2.2.9",
     "mapbox-gl": "^2.11.1",
     "next": "13.0.6",
     "next-redux-wrapper": "^8.1.0",

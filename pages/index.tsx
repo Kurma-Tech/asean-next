@@ -1,4 +1,6 @@
 import { useSelector } from 'react-redux';
+import ActionBarLayout from '../components/actionbar/ActionBarLayout';
+import AuthenticationLayout from '../components/layouts/authentication/AuthenticationLayout';
 import PrimaryLayout from '../components/layouts/primary/PrimaryLayout';
 import MapLayout from '../components/map/MapLayout';
 import ReportLayout from '../components/report/ReportLayout';
@@ -12,16 +14,22 @@ const Home: NextPageWithLayout = () => {
   const isReportVisible: boolean = useSelector(
     (state: RootState) => state.report.isReportVisible
   );
+  const isAuthLayoutShown: boolean = useSelector(
+    (state: RootState) => state.auth.isAuthLayoutShown
+  );
   return (
     <>
       <div className="absolute h-screen w-screen pointer-events-none">
-        <div className="flex pl-8 pt-8 h-full">
-          <SidebarLayout />
-          <div className="w-5"></div>
-          {isReportVisible ? <ReportLayout /> : <></>}
+        <div className="flex px-8 py-8 h-full">
+          <div className="flex-1 flex">
+            <SidebarLayout />
+            <div className="w-5"></div>
+            {isReportVisible ? <ReportLayout /> : <></>}
+          </div>
+          <ActionBarLayout />
         </div>
       </div>
-
+      {isAuthLayoutShown ? <AuthenticationLayout /> : <></>}
       <section className={styles.main}>
         <MapLayout />
       </section>
