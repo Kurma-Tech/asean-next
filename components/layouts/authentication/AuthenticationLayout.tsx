@@ -9,9 +9,7 @@ export interface IAuthenticationLayout {
   children?: React.ReactNode;
 }
 
-const AuthenticationLayout: React.FC<IAuthenticationLayout> = ({
-  children,
-}) => {
+const AuthenticationLayout: React.FC<IAuthenticationLayout> = () => {
   const isSignInForm: boolean = useSelector(
     (state: RootState) => state.auth.isSignInForm
   );

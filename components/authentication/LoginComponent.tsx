@@ -7,7 +7,7 @@ export interface ILoginComponent {
   children?: React.ReactNode;
 }
 
-const LoginComponent: React.FC<ILoginComponent> = ({ children }) => {
+const LoginComponent: React.FC<ILoginComponent> = () => {
   const dispatch = useDispatch();
   return (
     <div className="w-3/5 mx-auto flex flex-col">
@@ -49,7 +49,7 @@ const LoginComponent: React.FC<ILoginComponent> = ({ children }) => {
           </button>
         </div>
         <p className="text-center text-gray-400">
-          Don't have an account yet?{' '}
+          Don&apos;t have an account yet?{' '}
           <button
             className="text-black"
             type="button"

@@ -7,7 +7,7 @@ export interface IRegisterComponent {
   children?: React.ReactNode;
 }
 
-const RegisterComponent: React.FC<IRegisterComponent> = ({ children }) => {
+const RegisterComponent: React.FC<IRegisterComponent> = () => {
   const dispatch = useDispatch();
   return (
     <div className="w-3/5 mx-auto flex flex-col">

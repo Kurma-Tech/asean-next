@@ -6,7 +6,7 @@ export interface IActionBarLayout {
   children?: React.ReactNode;
 }
 
-const ActionBarLayout: React.FC<IActionBarLayout> = ({ children }) => {
+const ActionBarLayout: React.FC<IActionBarLayout> = () => {
   const dispatch = useDispatch();
   return (
     <div className="pointer-events-auto">
