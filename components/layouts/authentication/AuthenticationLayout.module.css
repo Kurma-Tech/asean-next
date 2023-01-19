@@ -16,6 +16,11 @@
   @apply py-3 text-gray-50 text-base;
 }
 
+.button_success {
+  @apply w-full bg-gradient-to-r from-green-600 to-green-700 rounded-md;
+  @apply py-3 text-gray-50 text-base;
+}
+
 .button_custom {
   @apply w-full border py-3 flex justify-center gap-2 hover:bg-gray-200 rounded-md;
 }

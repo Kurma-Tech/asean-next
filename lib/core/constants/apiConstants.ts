@@ -5,6 +5,16 @@ export const apiConfig = {
   },
 };
 
+export const apiConfigWithAuth = (token: string) => {
+  return {
+    headers: {
+      'content-type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      Authorization: 'Bearer ' + token,
+    },
+  };
+};
+
 export const apiPaths = {
   baseUrl: 'https://backend.aseanemergingindustries.com/api',
   getFilterDefaultUrl: '/filter/default',
@@ -12,4 +22,7 @@ export const apiPaths = {
   getPopularCategoryDataurl: '/report/popular',
   getTotalChartDataUrl: '/report/totalChart',
   getForecastDataUrl: '/report/predict',
+  loginUrl: '/login',
+  registerUrl: '/register',
+  getUserUrl: '/user',
 };

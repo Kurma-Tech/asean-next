@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ActionBarLayout from '../components/actionbar/ActionBarLayout';
 import AuthenticationLayout from '../components/layouts/authentication/AuthenticationLayout';
@@ -5,8 +6,9 @@ import PrimaryLayout from '../components/layouts/primary/PrimaryLayout';
 import MapLayout from '../components/map/MapLayout';
 import ReportLayout from '../components/report/ReportLayout';
 import SidebarLayout from '../components/sidebar/SidebarLayout';
+import { checkAuth } from '../lib/features/auth/authActions';
 import { changeDataset } from '../lib/features/filter/filterValuesAction';
-import { RootState, wrapper } from '../lib/store/store';
+import { RootState, store, wrapper } from '../lib/store/store';
 import styles from '../styles/Home.module.css';
 import { NextPageWithLayout } from './page';
 
@@ -17,6 +19,17 @@ const Home: NextPageWithLayout = () => {
   const isAuthLayoutShown: boolean = useSelector(
     (state: RootState) => state.auth.isAuthLayoutShown
   );
+  const [isFirstTime, setIsFirstTime] = useState(true);
+  const checkAuthAsync = async () => {
+    console.log('checkAuthAsync');
+    store.dispatch(await checkAuth());
+    setIsFirstTime(false);
+  };
+  useEffect(() => {
+    if (isFirstTime) {
+      checkAuthAsync();
+    }
+  }, [checkAuthAsync]);
   return (
     <>
       <div className="absolute h-screen w-screen pointer-events-none">

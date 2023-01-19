@@ -40,6 +40,7 @@ const SidebarLayout: React.FC<ISidebarLayout> = () => {
   const isReportVisible: boolean = useSelector(
     (state: RootState) => state.report.isReportVisible
   );
+
   return (
     <div className="w-1/6 max-w-full h-min bg-white/[.7] backdrop-blur-[4px] box-border rounded-[12px] pointer-events-auto">
       <div className="w-full">

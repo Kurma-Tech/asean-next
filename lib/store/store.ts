@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
+import ThunkMiddleware from 'redux-thunk';
 import authReducer from '../features/auth/authReducer';
 import filterValuesReducer from '../features/filter/filterValuesReducer';
 import forecastChartDataReducer from '../features/forecastChartData/forecastChartDataReducer';
@@ -9,6 +10,7 @@ import popularCategoryReducer from '../features/popularCategory/popularCategoryR
 import reportReducer from '../features/report/reportSlice';
 import totalChartDataReducer from '../features/totalChartData/totalChartDataReducer';
 
+const middleware = [ThunkMiddleware];
 export const store = configureStore({
   reducer: {
     map: mapReducer,
@@ -20,6 +22,8 @@ export const store = configureStore({
     report: reportReducer,
     auth: authReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(middleware),
 });
 
 const makeStore = () => store;
