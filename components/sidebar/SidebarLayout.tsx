@@ -242,9 +242,7 @@ const SidebarLayout: React.FC<ISidebarLayout> = () => {
                 dispatch(removeRequest());
                 dispatch(await updateMapData(filterStateData));
               }}
-            >
-              filter
-            </button>
+            ></button>
             <button
               className={`${styles.filterBtn} bg-[#efeef1] text-[#333]`}
               onClick={() => {

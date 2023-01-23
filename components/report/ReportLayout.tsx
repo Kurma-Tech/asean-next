@@ -5,6 +5,7 @@ import {
   hideReport,
 } from '../../lib/features/report/reportSlice';
 import { RootState } from '../../lib/store/store';
+import EmergingCategoryTable from './EmergingCategoryTable';
 import ForecastChart from './ForecastChart';
 import PopularCategoryTable from './PopularCategoryTable';
 import TotalDataChart from './TotalDataChart';
@@ -56,6 +57,7 @@ const ReportLayout: React.FC<IReportLayout> = () => {
           <PopularCategoryTable />
           <TotalDataChart />
           <ForecastChart />
+          <EmergingCategoryTable />
         </div>
       </div>
     </div>

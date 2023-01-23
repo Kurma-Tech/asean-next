@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 import ThunkMiddleware from 'redux-thunk';
 import authReducer from '../features/auth/authReducer';
+import emergingCategoryReducer from '../features/emergingCategory/emergingCategoryReducer';
 import filterValuesReducer from '../features/filter/filterValuesReducer';
 import forecastChartDataReducer from '../features/forecastChartData/forecastChartDataReducer';
 import mapReducer from '../features/map/mapSlice';
@@ -17,6 +18,7 @@ export const store = configureStore({
     filterValues: filterValuesReducer,
     mapData: mapDataReducer,
     popularCategory: popularCategoryReducer,
+    emergingCategory: emergingCategoryReducer,
     totalChartData: totalChartDataReducer,
     forecastChartData: forecastChartDataReducer,
     report: reportReducer,

@@ -1,17 +1,17 @@
 import { useCallback, useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import {
-  clearPopularData,
-  getPopularCategoryDataAction,
-} from '../../lib/features/popularCategory/popularCategoryAction';
-import { ResponsePopularCategoryType } from '../../lib/features/popularCategory/popularCategoryType';
+  clearEmergingData,
+  getEmergingCategoryDataAction,
+} from '../../lib/features/emergingCategory/emergingCategoryAction';
+import { ResponseEmergingCategoryType } from '../../lib/features/emergingCategory/emergingCategoryType';
 import { RootState } from '../../lib/store/store';
 
-export interface IPopularCategoryTable {
+export interface IEmergingCategoryTable {
   children?: React.ReactNode;
 }
 
-const PopularCategoryTable: React.FC<IPopularCategoryTable> = () => {
+const EmergingCategoryTable: React.FC<IEmergingCategoryTable> = () => {
   const dispatch = useDispatch();
   const dataType: string = useSelector(
     (state: RootState) => state.filterValues.dataType
@@ -22,12 +22,9 @@ const PopularCategoryTable: React.FC<IPopularCategoryTable> = () => {
   const year: string = useSelector(
     (state: RootState) => state.filterValues.year
   );
-  const categories: ResponsePopularCategoryType[] = useSelector(
-    (state: RootState) => state.popularCategory.categories,
+  const categories: ResponseEmergingCategoryType[] = useSelector(
+    (state: RootState) => state.emergingCategory.categories,
     shallowEqual
-  );
-  const limit: number = useSelector(
-    (state: RootState) => state.popularCategory.limit
   );
   const removeRequest = useSelector(
     (state: RootState) => state.mapData.removeRequest
@@ -38,28 +35,27 @@ const PopularCategoryTable: React.FC<IPopularCategoryTable> = () => {
 
   const getData = useCallback(async () => {
     dispatch(
-      await getPopularCategoryDataAction({
+      await getEmergingCategoryDataAction({
         dataType: dataType,
-        limit: limit,
         country: country,
         year: year,
       })
     );
-  }, [dispatch, dataType, limit, country, year]);
+  }, [dispatch, dataType, country, year]);
 
   useEffect(() => {
     if (removeRequest || isReportNew) {
-      dispatch(clearPopularData());
+      dispatch(clearEmergingData());
       getData();
     }
   }, [getData, dispatch, isReportNew, removeRequest]);
   return (
-    <div className="bg-white rounded-[12px] h-[320px] overflow-auto border-4 border-white box-border">
+    <div className="bg-white rounded-[12px] h-[320px] overflow-auto border-4 border-white box-border mt-3">
       <table className="table-auto items-center w-full">
         <thead className="sticky bg-white top-0">
           <tr>
             <th className="px-3 py-2 text-xs uppercase font-semibold text-left whitespace-nowrap">
-              Popular {dataType}
+              Emerging {dataType}
             </th>
             <th></th>
             <th className="px-3 py-2 flex justify-end items-center">
@@ -72,25 +68,6 @@ const PopularCategoryTable: React.FC<IPopularCategoryTable> = () => {
                   Young
                 </div>
               </div>
-              <select
-                name=""
-                id=""
-                className="rounded-[5px] text-xs border px-1 py-[1px] border-grey-100 box-border"
-                onChange={async (e) => {
-                  dispatch(
-                    await getPopularCategoryDataAction({
-                      dataType: dataType,
-                      limit: Number(e.target.value),
-                      country: country,
-                      year: year,
-                    })
-                  );
-                }}
-              >
-                <option value={10}>Top 10</option>
-                <option value={20}>Top 20</option>
-                <option value={30}>Top 30</option>
-              </select>
             </th>
           </tr>
           <tr>
@@ -101,7 +78,7 @@ const PopularCategoryTable: React.FC<IPopularCategoryTable> = () => {
               {dataType} Classification
             </th>
             <th className="px-6 py-3 text-xs uppercase font-semibold text-left whitespace-nowrap">
-              Count
+              Rate
             </th>
           </tr>
         </thead>
@@ -115,7 +92,7 @@ const PopularCategoryTable: React.FC<IPopularCategoryTable> = () => {
                 <td className="bg-gray-50 px-6 text-xs p-4">{index + 1}</td>
                 <td className="bg-gray-50 px-6 text-xs p-4">{category.key}</td>
                 <td className="bg-gray-50 px-6 text-xs p-4">
-                  {category.value}
+                  {category.value} %
                 </td>
               </tr>
             );
@@ -126,4 +103,4 @@ const PopularCategoryTable: React.FC<IPopularCategoryTable> = () => {
   );
 };
 
-export default PopularCategoryTable;
+export default EmergingCategoryTable;

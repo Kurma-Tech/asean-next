@@ -20,6 +20,7 @@ export const apiPaths = {
   getFilterDefaultUrl: '/filter/default',
   filterMapDataUrl: '/filter/mapdata',
   getPopularCategoryDataurl: '/report/popular',
+  getEmergingCategoryDataurl: '/report/emerging',
   getTotalChartDataUrl: '/report/totalChart',
   getForecastDataUrl: '/report/predict',
   loginUrl: '/login',
