@@ -6,7 +6,6 @@ import {
   clearDensityMapStateData,
   clearDensityRemoveRequest,
 } from '../../lib/features/densityMapData/densityMapDataAction';
-import { FilterValuesState } from '../../lib/features/filter/filterValuesReducer';
 import { mapSelectors } from '../../lib/features/map/mapSlice';
 import { RootState } from '../../lib/store/store';
 import styles from './MapLayout.module.css';
@@ -28,10 +27,6 @@ const DensityMapLayout: React.FC<IDensityMapLayout> = () => {
   );
   const removeDensityRequest = useSelector(
     (state: RootState) => state.densityMapData.removeDensityRequest
-  );
-  const filterStateData: FilterValuesState = useSelector(
-    (state: RootState) => state.filterValues,
-    shallowEqual
   );
 
   useEffect(() => {
@@ -58,8 +53,8 @@ const DensityMapLayout: React.FC<IDensityMapLayout> = () => {
       (map.current as any).removeLayer('state-business-density');
     }
 
-    var mapLayer = (map.current as any).getSource('business-density');
-    if (typeof mapLayer !== 'undefined') {
+    var mapSource = (map.current as any).getSource('business-density');
+    if (typeof mapSource !== 'undefined') {
       (map.current as any).removeSource('business-density');
     }
 
@@ -76,14 +71,10 @@ const DensityMapLayout: React.FC<IDensityMapLayout> = () => {
         type: 'vector',
         url: 'mapbox://kurmatech.7s6qx4no',
       });
-
-      const zoomThreshold = 4;
-
       const matchExpression = ['match', ['get', 'long']];
       for (const row of data) {
         // Convert the range of data values to a suitable color
         var color = `(0, 0, 0)`;
-        const red = Math.floor((row['value'] / 20000) * 1000);
         if (row['value'] > 0 && row['value'] <= 500) {
           color = '#F2F12D';
         } else if (row['value'] > 500 && row['value'] <= 750) {
