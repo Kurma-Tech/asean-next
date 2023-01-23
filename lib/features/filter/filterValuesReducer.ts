@@ -25,8 +25,6 @@ const initialState: FilterValuesState = {
 };
 
 export default function reducer(state = initialState, action: any) {
-  console.log(action);
-
   switch (action.type) {
     case HYDRATE: {
       return {

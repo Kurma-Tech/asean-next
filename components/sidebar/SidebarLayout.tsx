@@ -2,6 +2,10 @@ import styles from './SidebarLayout.module.css';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import {
+  removeDensityRequest,
+  updateDensityMapData,
+} from '../../lib/features/densityMapData/densityMapDataAction';
+import {
   changeCategory,
   changeCountry,
   changeDataset,
@@ -36,6 +40,9 @@ const SidebarLayout: React.FC<ISidebarLayout> = () => {
   );
   const currentDataType: string = useSelector(
     (state: RootState) => state.filterValues.dataType
+  );
+  const isDensity: boolean = useSelector(
+    (state: RootState) => state.mapChange.isDensity
   );
   const isReportVisible: boolean = useSelector(
     (state: RootState) => state.report.isReportVisible
@@ -239,8 +246,13 @@ const SidebarLayout: React.FC<ISidebarLayout> = () => {
             <button
               className={`${styles.filterBtn} bg-black text-[#efeef1]`}
               onClick={async () => {
-                dispatch(removeRequest());
-                dispatch(await updateMapData(filterStateData));
+                if (isDensity) {
+                  dispatch(removeRequest());
+                  dispatch(await updateMapData(filterStateData));
+                } else {
+                  dispatch(removeDensityRequest());
+                  dispatch(await updateDensityMapData(filterStateData));
+                }
               }}
             >
               Filter

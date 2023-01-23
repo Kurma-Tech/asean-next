@@ -19,7 +19,6 @@ export const updateMapData = async (
     },
     paginationLink
   );
-  console.log(responseData.data.length);
 
   return {
     type: mapDataActionTypes.UPDATE_MAP_DATA,

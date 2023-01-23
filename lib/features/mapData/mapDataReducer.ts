@@ -19,7 +19,6 @@ const initialState: MapDataState = {
 export default function reducer(state = initialState, action: any) {
   switch (action.type) {
     case mapDataActionTypes.UPDATE_MAP_DATA: {
-      console.log('ere');
       return {
         ...state,
         business: [...state.business, ...action.business],
@@ -35,8 +34,6 @@ export default function reducer(state = initialState, action: any) {
       };
     }
     case mapDataActionTypes.ADD_PAGE: {
-      console.log('ADD_PAGE' + state.page);
-
       return {
         ...state,
         page: state.page + 1,

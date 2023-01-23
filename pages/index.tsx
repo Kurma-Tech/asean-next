@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import ActionBarLayout from '../components/actionbar/ActionBarLayout';
 import AuthenticationLayout from '../components/layouts/authentication/AuthenticationLayout';
 import PrimaryLayout from '../components/layouts/primary/PrimaryLayout';
+import DensityMapLayout from '../components/map/DensityMapLayout';
 import MapLayout from '../components/map/MapLayout';
 import ReportLayout from '../components/report/ReportLayout';
 import SidebarLayout from '../components/sidebar/SidebarLayout';
@@ -21,7 +22,6 @@ const Home: NextPageWithLayout = () => {
   );
   const [isFirstTime, setIsFirstTime] = useState(true);
   const checkAuthAsync = async () => {
-    console.log('checkAuthAsync');
     store.dispatch(await checkAuth());
     setIsFirstTime(false);
   };
@@ -30,6 +30,9 @@ const Home: NextPageWithLayout = () => {
       checkAuthAsync();
     }
   }, [checkAuthAsync]);
+  const isDensity: boolean = useSelector(
+    (state: RootState) => state.mapChange.isDensity
+  );
   return (
     <>
       <div className="absolute h-screen w-screen pointer-events-none">
@@ -44,7 +47,7 @@ const Home: NextPageWithLayout = () => {
       </div>
       {isAuthLayoutShown ? <AuthenticationLayout /> : <></>}
       <section className={styles.main}>
-        <MapLayout />
+        {isDensity ? <MapLayout /> : <DensityMapLayout />}
       </section>
     </>
   );

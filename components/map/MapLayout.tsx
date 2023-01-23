@@ -87,9 +87,6 @@ const MapLayout: React.FC<IMapLayout> = () => {
       removeLayers();
     }
     if (businessPoints.length > 0) {
-      console.log('pageNumber:' + pageNumber);
-      console.log(removeRequest);
-
       (map.current as any).addSource('business' + pageNumber, {
         type: 'geojson',
         data: { type: 'FeatureCollection', features: businessPoints },

@@ -2,10 +2,12 @@ import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 import ThunkMiddleware from 'redux-thunk';
 import authReducer from '../features/auth/authReducer';
+import denstiyMapDataReducer from '../features/densityMapData/densityMapDataReducer';
 import emergingCategoryReducer from '../features/emergingCategory/emergingCategoryReducer';
 import filterValuesReducer from '../features/filter/filterValuesReducer';
 import forecastChartDataReducer from '../features/forecastChartData/forecastChartDataReducer';
 import mapReducer from '../features/map/mapSlice';
+import mapChangeReducer from '../features/mapChange/mapChangeSlice';
 import mapDataReducer from '../features/mapData/mapDataReducer';
 import popularCategoryReducer from '../features/popularCategory/popularCategoryReducer';
 import reportReducer from '../features/report/reportSlice';
@@ -15,8 +17,10 @@ const middleware = [ThunkMiddleware];
 export const store = configureStore({
   reducer: {
     map: mapReducer,
+    mapChange: mapChangeReducer,
     filterValues: filterValuesReducer,
     mapData: mapDataReducer,
+    densityMapData: denstiyMapDataReducer,
     popularCategory: popularCategoryReducer,
     emergingCategory: emergingCategoryReducer,
     totalChartData: totalChartDataReducer,

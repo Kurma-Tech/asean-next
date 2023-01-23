@@ -19,6 +19,7 @@ export const apiPaths = {
   baseUrl: 'https://backend.aseanemergingindustries.com/api',
   getFilterDefaultUrl: '/filter/default',
   filterMapDataUrl: '/filter/mapdata',
+  filterDenstiyMapDataUrl: '/filter/densityMapData',
   getPopularCategoryDataurl: '/report/popular',
   getEmergingCategoryDataurl: '/report/emerging',
   getTotalChartDataUrl: '/report/totalChart',
