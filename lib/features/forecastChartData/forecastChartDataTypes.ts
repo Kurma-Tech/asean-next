@@ -5,8 +5,8 @@ export const forecastChartDataTypes = {
 
 export interface RequestForecastChartDataType {
   type: string;
-  country_id?: number;
-  classification_id?: number;
+  country?: number;
+  category?: number;
 }
 
 export interface ResponseForecastChartDataType {

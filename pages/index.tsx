@@ -10,7 +10,6 @@ import SidebarLayout from '../components/sidebar/SidebarLayout';
 import { checkAuth } from '../lib/features/auth/authActions';
 import { changeDataset } from '../lib/features/filter/filterValuesAction';
 import { RootState, store, wrapper } from '../lib/store/store';
-import styles from '../styles/Home.module.css';
 import { NextPageWithLayout } from './page';
 
 const Home: NextPageWithLayout = () => {
@@ -35,8 +34,8 @@ const Home: NextPageWithLayout = () => {
   );
   return (
     <>
-      <div className="absolute h-screen w-screen pointer-events-none">
-        <div className="flex px-8 py-8 h-full">
+      <div className="absolute h-screen w-screen pointer-events-none z-10">
+        <div className="flex px-4 py-4 h-full">
           <div className="flex-1 flex">
             <SidebarLayout />
             <div className="w-5"></div>
@@ -46,7 +45,7 @@ const Home: NextPageWithLayout = () => {
         </div>
       </div>
       {isAuthLayoutShown ? <AuthenticationLayout /> : <></>}
-      <section className={styles.main}>
+      <section className="w-full">
         {isDensity ? <MapLayout /> : <DensityMapLayout />}
       </section>
     </>

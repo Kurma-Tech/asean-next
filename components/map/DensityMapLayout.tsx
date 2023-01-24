@@ -1,4 +1,5 @@
 import mapboxgl from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+import 'mapbox-gl/dist/mapbox-gl.css';
 import { useCallback, useEffect, useRef } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
@@ -45,6 +46,9 @@ const DensityMapLayout: React.FC<IDensityMapLayout> = () => {
         [141.79211516906793, 27.60302090835848],
       ],
     }) as any;
+
+    var nav = new mapboxgl.NavigationControl();
+    (map.current as any).addControl(nav, 'bottom-right');
   });
 
   const removeLayers = useCallback(() => {

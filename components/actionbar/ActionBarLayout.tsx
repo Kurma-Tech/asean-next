@@ -27,7 +27,7 @@ const ActionBarLayout: React.FC<IActionBarLayout> = () => {
   );
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   return (
-    <div className="pointer-events-auto flex flex-col gap-2">
+    <div className="pointer-events-auto flex flex-col gap-2 h-min">
       <div className="relative">
         <button
           className={styles.action_button}

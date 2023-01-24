@@ -1,4 +1,5 @@
 import mapboxgl from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+import 'mapbox-gl/dist/mapbox-gl.css';
 import { useCallback, useEffect, useRef } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
@@ -61,6 +62,9 @@ const MapLayout: React.FC<IMapLayout> = () => {
         [141.79211516906793, 27.60302090835848],
       ],
     }) as any;
+
+    var nav = new mapboxgl.NavigationControl();
+    (map.current as any).addControl(nav, 'bottom-right');
   });
 
   const paginate = useCallback(async () => {
@@ -134,7 +138,11 @@ const MapLayout: React.FC<IMapLayout> = () => {
     if (!map.current) return; // wait for map to initialize
     boilerplate().then(() => {});
   }, [boilerplate]);
-  return <div ref={mapContainer} className={styles.mapContainer} />;
+  return (
+    <div className="relative h-screen w-full">
+      <div ref={mapContainer} className={styles.mapContainer} />
+    </div>
+  );
 };
 
 export default MapLayout;

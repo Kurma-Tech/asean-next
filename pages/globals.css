@@ -23,3 +23,26 @@
 }
 @tailwind components;
 @tailwind utilities;
+
+.mapboxgl-ctrl-bottom-left {
+  bottom: 1rem !important;
+  left: 1rem !important;
+}
+
+.mapboxgl-ctrl-bottom-left .mapboxgl-ctrl {
+  margin: 0 !important;
+}
+
+.mapboxgl-ctrl-bottom-right {
+  bottom: 1rem !important;
+  right: 1rem !important;
+}
+
+.mapboxgl-ctrl-bottom-right .mapboxgl-ctrl {
+  margin: 0 !important;
+  z-index: 15;
+}
+
+a.mapboxgl-ctrl-logo {
+  margin: 0 !important;
+}

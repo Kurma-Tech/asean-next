@@ -42,8 +42,8 @@ const ForecastChart: React.FC<IForecastChart> = () => {
     dispatch(
       await getForecastChartDataAction({
         type: dataType,
-        country_id: country ?? null,
-        classification_id: category ?? null,
+        country: country ?? null,
+        category: category ?? null,
       })
     );
   }, [dispatch, category, country, dataType]);
