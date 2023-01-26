@@ -34,17 +34,19 @@ const Home: NextPageWithLayout = () => {
   );
   return (
     <>
-      <div className="absolute h-screen w-screen pointer-events-none z-10">
-        <div className="flex px-4 py-4 h-full">
-          <div className="flex-1 flex">
-            <SidebarLayout />
-            <div className="w-5"></div>
-            {isReportVisible ? <ReportLayout /> : <></>}
+      <div className="z-10">
+        <div className="absolute h-screen w-screen pointer-events-none">
+          <div className="flex px-4 py-4 h-full">
+            <div className="flex-1 flex">
+              <SidebarLayout />
+              <div className="w-5"></div>
+              {isReportVisible ? <ReportLayout /> : <></>}
+            </div>
+            <ActionBarLayout />
           </div>
-          <ActionBarLayout />
         </div>
+        {isAuthLayoutShown ? <AuthenticationLayout /> : <></>}
       </div>
-      {isAuthLayoutShown ? <AuthenticationLayout /> : <></>}
       <section className="w-full">
         {isDensity ? <MapLayout /> : <DensityMapLayout />}
       </section>
