@@ -91,7 +91,7 @@ const TotalDataChart: React.FC<ITotalDataChart> = () => {
     <div className="bg-white rounded-[12px] border-4 border-white box-border mt-3">
       <div className="px-3 py-2 flex justify-between">
         <div className="text-xs uppercase font-semibold text-left whitespace-nowrap">
-          Total {dataType} per year
+          Total {dataType} per year : {counts.reduce((a: number, b: number) => a + b, 0)} results
         </div>
         <div className="flex text-[12px] items-center">
           Filtered By:
